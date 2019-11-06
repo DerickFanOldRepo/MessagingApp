@@ -46,7 +46,8 @@ public class Messenger extends Application {
         createButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				try {
-					Thread thread = new Thread(new Server(stage, 12345));
+					Thread thread = new Thread(new HostServer(stage, 
+							Integer.parseInt(portText.getText())));
 					thread.setDaemon(true);
 					thread.start();
 				} catch (NumberFormatException e) {
@@ -59,7 +60,8 @@ public class Messenger extends Application {
         connectButton.setOnAction(new EventHandler<ActionEvent>() {
         	public void handle(ActionEvent event) {
         		try {
-					Thread thread = new Thread(new Client(stage, ipText.getText()));
+					Thread thread = new Thread(new ClientServer(stage, 
+							Integer.parseInt(portText.getText()), ipText.getText()));
 					thread.setDaemon(true);
 					thread.start();
 				} catch (NumberFormatException e) {
